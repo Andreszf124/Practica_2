@@ -1,8 +1,36 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="home-page">
+    <div class="home-heading">
+        <h1>Tu inventario de productos<br /><span>bajo control.</span></h1>
+        <p>Administra categorías y productos desde un solo lugar.</p>
+    </div>
+
+    <a class="home-feature" asp-controller="Categoria" asp-action="Index">
+        <div class="home-feature-icon"><i class="bi bi-tags-fill"></i></div>
+        <div class="home-feature-copy">
+            <span class="home-feature-label">GESTIÓN</span>
+            <h2>Categorías de productos</h2>
+            <p>Consulta, registra y mantén al día las categorías disponibles.</p>
+        </div>
+        <span class="home-feature-link">Ver categorías <i class="bi bi-arrow-up-right"></i></span>
+    </a>
+
+    <a class="home-feature" asp-controller="Producto" asp-action="Index">
+        <div class="home-feature-icon"><i class="bi bi-box-seam-fill"></i></div>
+        <div class="home-feature-copy">
+            <span class="home-feature-label">GESTIÓN</span>
+            <h2>Gestión de productos</h2>
+            <p>Consulta, registra y mantén al día los datos de cada producto.</p>
+        </div>
+        <span class="home-feature-link">Ver productos <i class="bi bi-arrow-up-right"></i></span>
+    </a>
+
+    <div class="home-note">
+        <span class="home-note-mark"><i class="bi bi-check2"></i></span>
+        <p><strong>Todo en orden.</strong> Accede a categorías y productos para gestionar tu inventario.</p>
+    </div>
+</section>
+

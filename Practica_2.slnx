@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Practica_2.Application/Practica_2.Application.csproj" Id="1453d43f-1861-47dc-8ebd-7f5e80ed7fbc" />
+  <Project Path="Practica_2.Domain/Practica_2.Domain.csproj" Id="24667197-4e21-4b26-a64f-84bd42ddcaa5" />
+  <Project Path="Practica_2.Infrastructure/Practica_2.Infrastructure.csproj" Id="093c1ce4-af3e-415a-acbb-b5f7e6834c81" />
   <Project Path="Practica_2/Practica_2.csproj" />
 </Solution>

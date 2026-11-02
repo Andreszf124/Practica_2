@@ -1,0 +1,43 @@
+@model Practica_2.Application.Dtos.CategoriaDto
+
+<div class="modal fade" id="modalEditarCategoria" tabindex="-1" aria-labelledby="modalEditarCategoriaLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered vehicle-modal-dialog">
+        <div class="modal-content vehicle-modal">
+            <form id="formEditarCategoria" method="post">
+                <div class="modal-header vehicle-modal-header">
+                    <div class="vehicle-modal-heading">
+                        <span class="vehicle-modal-icon"><i class="bi bi-pencil-fill"></i></span>
+                        <div>
+                            <span class="vehicle-modal-eyebrow">EDITAR REGISTRO</span>
+                            <h5 class="modal-title" id="modalEditarCategoriaLabel">Editar categoría</h5>
+                            <p class="vehicle-modal-subtitle">Modifica los datos de la categoría.</p>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body vehicle-modal-body">
+                    <div id="mensajeEditarCategoria" class="alert d-none" role="alert"></div>
+                    <input type="hidden" id="id" name="id" />
+                    <div class="vehicle-field mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <div class="vehicle-control">
+                            <i class="bi bi-tag" aria-hidden="true"></i>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="Ej. Electrónica" autocomplete="off" required />
+                        </div>
+                    </div>
+                    <div class="vehicle-field mb-3">
+                        <label for="description" class="form-label">Descripción</label>
+                        <div class="vehicle-control">
+                            <i class="bi bi-file-text" aria-hidden="true"></i>
+                            <textarea id="description" name="description" class="form-control" placeholder="Ingresa una descripción (opcional)" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer vehicle-modal-footer">
+                    <button type="button" class="btn btn-modal-cancel" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-modal-primary" id="btnEditarCategoria"><i class="bi bi-check2"></i> Actualizar categoría</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,7 +1,22 @@
+using Microsoft.EntityFrameworkCore;
+using Practica_2.Application.Mapping;
+using Practica_2.Infrastructure.Data;
+using Practica_2.Infrastructure.Repositories;
+using Practica_2.Application.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<ICategoriaRepository, CategoriaRepository>();
+builder.Services.AddScoped<ICategoriaServicio, CategoriaServicio>();
+
+//ADD MAPPER
+builder.Services.AddAutoMapper(cfg => { }, typeof(MapeoClases));
 
 var app = builder.Build();
 
