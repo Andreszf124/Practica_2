@@ -6,8 +6,23 @@ using Practica_2.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
+var conexion = builder.Configuration
+    .GetConnectionString("ConexionSQLite")
+    ?? throw new InvalidOperationException(
+        "No se encontro la conexion SQLite.");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlite(conexion));
+
+builder.Services.AddScoped(
+    typeof(IRepositorioGenerico<>),
+    typeof(RepositorioGenerico<>));
+
+builder.Services.AddScoped<IProductoServicio, ProductoServicio>();
+
+
+builder.Services.AddProblemDetails();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -20,15 +35,27 @@ builder.Services.AddAutoMapper(cfg => { }, typeof(MapeoClases));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
+
+
+app.UseExceptionHandler();
+
+if (!app.Environment.IsDevelopment())
+{
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();

@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/3.1.3/css/dataTables.dataTables.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/app.css" asp-append-version="true" />
+
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light app-navbar">
@@ -21,42 +23,64 @@
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
+
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index"><i class="bi bi-grid-1x2-fill"></i> Inicio</a>
+
                         </li>
+
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Categoria" asp-action="Index"><i class="bi bi-tags-fill"></i> Categorías</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Producto" asp-action="Index"><i class="bi bi-box-seam"></i> Productos</a>
+
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark"
+                               asp-controller="Categoria"
+                               asp-action="Index">
+                                Categorías
+                            </a>
+                        </li>
+
                     </ul>
+
                 </div>
             </div>
         </nav>
     </header>
     <div class="app-shell">
         <main role="main" class="container app-main">
+
             @RenderBody()
         </main>
+
     </div>
 
     <footer class="app-footer">
         <div class="container">
             <span>&copy; 2026 ReservasCostaRica</span>
             <span>Gestión eficiente de espacios y reservas.</span>
+
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdn.datatables.net/3.1.3/js/dataTables.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
 
