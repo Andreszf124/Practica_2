@@ -62,6 +62,8 @@
           asp-action="EliminarProducto"
           method="post">
 
+        @Html.AntiForgeryToken()
+
         <input type="hidden" name="id" />
 
     </form>

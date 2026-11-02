@@ -31,7 +31,8 @@ namespace Practica_2.Controllers
             return Json(categoria);
         }
 
-        public async Task<IActionResult> CrearCategoria(CategoriaDto categoria)
+        [HttpPost]
+        public async Task<IActionResult> CrearCategoria([FromBody] CategoriaDto categoria)
         {
             if (!ModelState.IsValid)
             {
@@ -42,7 +43,8 @@ namespace Practica_2.Controllers
             return Json(respuesta);
         }
 
-        public async Task<IActionResult> ActualizarCategoria(CategoriaDto categoria)
+        [HttpPost]
+        public async Task<IActionResult> ActualizarCategoria([FromBody] CategoriaDto categoria)
         {
             if (!ModelState.IsValid)
             {
@@ -53,6 +55,7 @@ namespace Practica_2.Controllers
             return Json(respuesta);
         }
 
+        [HttpPost]
         public async Task<IActionResult> EliminarCategoria(int id)
         {
             var respuesta = await _categoriaServicio.EliminarCategoriaAsync(id);

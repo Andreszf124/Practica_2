@@ -6,12 +6,12 @@ namespace Practica_2.Application.Services
 {
     public class ProductoServicio : IProductoServicio
     {
-        private readonly IRepositorioGenerico<Producto> _productoRepository;
-        private readonly IRepositorioGenerico<Categoria> _categoriaRepository;
+        private readonly IRepositorioGenerico<Product> _productoRepository;
+        private readonly IRepositorioGenerico<Category> _categoriaRepository;
 
         public ProductoServicio(
-            IRepositorioGenerico<Producto> productoRepository,
-            IRepositorioGenerico<Categoria> categoriaRepository)
+            IRepositorioGenerico<Product> productoRepository,
+            IRepositorioGenerico<Category> categoriaRepository)
         {
             _productoRepository = productoRepository;
             _categoriaRepository = categoriaRepository;
@@ -20,7 +20,7 @@ namespace Practica_2.Application.Services
         public async Task<List<ProductoDto>> ObtenerProductosAsync()
         {
             var productos = await _productoRepository
-                .ObtenerTodosAsync(p => p.Categoria!);
+                .ObtenerTodosAsync(p => p.Category!);
 
             return productos.Select(ConvertirDto).ToList();
         }
@@ -44,23 +44,23 @@ namespace Practica_2.Application.Services
             return categorias.Select(c => new CategoriaOpcionDto
             {
                 Id = c.Id,
-                Nombre = c.Nombre
+                Nombre = c.Name
             }).ToList();
         }
 
         public async Task<Respuesta<ProductoDto>> CrearProductoAsync(
             ProductoDto producto)
         {
-            var entidad = new Producto
+            var entidad = new Product
             {
-                Nombre = producto.Nombre.Trim(),
-                Descripcion = producto.Descripcion?.Trim(),
-                Precio = producto.Precio,
+                Name = producto.Nombre.Trim(),
+                Description = producto.Descripcion?.Trim(),
+                Price = (double)producto.Precio,
                 Stock = producto.Stock,
-                CategoriaId = producto.CategoriaId
+                CategoryId = producto.CategoriaId
             };
 
-            if (!entidad.ValidarDatos())
+            if (!ValidarDatos(entidad))
             {
                 return Error("Los datos del producto no son válidos.");
             }
@@ -78,7 +78,7 @@ namespace Practica_2.Application.Services
                 return Error("No se pudo crear el producto.", 500);
             }
 
-            entidad.Categoria = categoria;
+            entidad.Category = categoria;
 
             return new Respuesta<ProductoDto>
             {
@@ -103,13 +103,13 @@ namespace Practica_2.Application.Services
                 return Error("El producto no existe.", 404);
             }
 
-            existente.Nombre = producto.Nombre.Trim();
-            existente.Descripcion = producto.Descripcion?.Trim();
-            existente.Precio = producto.Precio;
+            existente.Name = producto.Nombre.Trim();
+            existente.Description = producto.Descripcion?.Trim();
+            existente.Price = (double)producto.Precio;
             existente.Stock = producto.Stock;
-            existente.CategoriaId = producto.CategoriaId;
+            existente.CategoryId = producto.CategoriaId;
 
-            if (!existente.ValidarDatos())
+            if (!ValidarDatos(existente))
             {
                 return Error("Los datos del producto no son válidos.");
             }
@@ -127,7 +127,7 @@ namespace Practica_2.Application.Services
                 return Error("No se pudo actualizar el producto.", 500);
             }
 
-            existente.Categoria = categoria;
+            existente.Category = categoria;
 
             return new Respuesta<ProductoDto>
             {
@@ -154,18 +154,26 @@ namespace Practica_2.Application.Services
             };
         }
 
-        private static ProductoDto ConvertirDto(Producto producto)
+        private static ProductoDto ConvertirDto(Product producto)
         {
             return new ProductoDto
             {
                 Id = producto.Id,
-                Nombre = producto.Nombre,
-                Descripcion = producto.Descripcion,
-                Precio = producto.Precio,
+                Nombre = producto.Name,
+                Descripcion = producto.Description,
+                Precio = (decimal)producto.Price,
                 Stock = producto.Stock,
-                CategoriaId = producto.CategoriaId,
-                CategoriaNombre = producto.Categoria?.Nombre
+                CategoriaId = producto.CategoryId,
+                CategoriaNombre = producto.Category?.Name
             };
+        }
+
+        private static bool ValidarDatos(Product producto)
+        {
+            return !string.IsNullOrWhiteSpace(producto.Name)
+                && producto.Price > 0
+                && producto.Stock >= 0
+                && producto.CategoryId > 0;
         }
 
         private static Respuesta<ProductoDto> Error(

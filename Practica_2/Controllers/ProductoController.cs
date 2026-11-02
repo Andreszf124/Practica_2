@@ -48,7 +48,7 @@ namespace Practica_2.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CrearProducto(ProductoDto producto)
+        public async Task<IActionResult> CrearProducto([FromForm] ProductoDto producto)
         {
             if (!ModelState.IsValid)
             {
@@ -68,7 +68,7 @@ namespace Practica_2.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ActualizarProducto(
-            ProductoDto producto)
+            [FromForm] ProductoDto producto)
         {
             if (!ModelState.IsValid)
             {
