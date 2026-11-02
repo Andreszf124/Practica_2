@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Practica_2.Application/Practica_2.Application.csproj" />
+  <Project Path="Practica_2.Domain/Practica_2.Domain.csproj" />
+  <Project Path="Practica_2.Infrastructure/Practica_2.Infrastructure.csproj" />
   <Project Path="Practica_2/Practica_2.csproj" />
 </Solution>
